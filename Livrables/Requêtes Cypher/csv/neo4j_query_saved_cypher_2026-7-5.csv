@@ -1,0 +1,58 @@
+name,description,query,id,parentId,isFolder
+Requêtes de création,,,0,,true
+Ressource,,,1,0,false
+User,,"CREATE (:User {name: ""alice"", role: ""RH""});
+CREATE (:User {name: ""bob"", role: ""Développeur""});
+CREATE (:User {name: ""charlie"", role: ""Admin Système""});
+CREATE (:User {name: ""diana"", role: ""RSSI""});
+CREATE (:User {name: ""eve"", role: ""Stagiaire""});",2,0,false
+Machine,,"CREATE (:Machine {name: ""PC-ALICE"", type: ""workstation"", criticality: ""low""});
+CREATE (:Machine {name: ""PC-BOB"", type: ""workstation"", criticality: ""medium""});
+CREATE (:Machine {name: ""SRV-WEB"", type: ""server"", criticality: ""medium""});
+CREATE (:Machine {name: ""SRV-DB"", type: ""database"", criticality: ""high""});
+CREATE (:Machine {name: ""DC-01"", type: ""domain_controller"", criticality: ""critical""});
+CREATE (:Machine {name: ""NAS-BACKUP"", type: ""backup_server"", criticality: ""critical""});",3,0,false
+Services,,"CREATE (:Service {name: ""SSH"", port: 22});
+CREATE (:Service {name: ""HTTP"", port: 80});
+CREATE (:Service {name: ""HTTPS"", port: 443});
+CREATE (:Service {name: ""RDP"", port: 3389});
+CREATE (:Service {name: ""SMB"", port: 445});
+CREATE (:Service {name: ""MongoDB"", port: 27017});",4,0,false
+Vulnerability,,"CREATE (:Vulnerability {
+  cve: ""CVE-2021-44228"",
+  name: ""Log4Shell"",
+  score: 10,
+  description: ""Exécution de code à distance via Log4j""
+});
+
+CREATE (:Vulnerability {
+  cve: ""CVE-2020-1472"",
+  name: ""Zerologon"",
+  score: 10,
+  description: ""Élévation de privilèges sur contrôleur de domaine""
+});
+
+CREATE (:Vulnerability {
+  cve: ""CVE-2019-0708"",
+  name: ""BlueKeep"",
+  score: 9.8,
+  description: ""Exécution de code à distance via RDP""
+});
+
+CREATE (:Vulnerability {
+  cve: ""CVE-2022-22965"",
+  name: ""Spring4Shell"",
+  score: 9.8,
+  description: ""Exécution de code à distance sur application Spring""
+});
+
+CREATE (:Vulnerability {
+  cve: ""CVE-2023-0001"",
+  name: ""SMB Misconfiguration"",
+  score: 7.5,
+  description: ""Mauvaise configuration du partage SMB""
+});",5,0,false
+Group,,"CREATE (:Group {name: ""RH""});
+CREATE (:Group {name: ""DEV""});
+CREATE (:Group {name: ""ADMINS""});
+CREATE (:Group {name: ""SECURITY""});",6,0,false
