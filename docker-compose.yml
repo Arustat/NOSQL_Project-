@@ -1,11 +1,8 @@
 services:
   neo4j:
-    image: neo4j:latest
+    image: neo4j:5.26.28-community
     volumes:
-        - /${HOME}/neo4j/logs:/logs
-        - /${HOME}/neo4j/conf:/conf
-        - /${HOME}/neo4j/data:/data
-        - /${HOME}/neo4j/plugins:/plugins
+        - .data:/data
     environment:
         - NEO4J_AUTH=neo4j/${PASSWORD}
     ports:
