@@ -49,3 +49,19 @@ RETURN m.name AS machine, pire_score,
          ELSE "Faible"
        END AS niveau_de_risque
 ORDER BY pire_score DESC;
+
+// ── 10. Utilisateurs disposant de droits d'administration (ADMIN_OF) ──
+MATCH (u:User)-[:ADMIN_OF]->(m:Machine)
+RETURN u.name AS utilisateur, collect(m.name) AS machines_administrees, m.criticality AS criticite
+ORDER BY utilisateur;
+
+// ── 11. Utilisateurs accédant à des machines critiques via un groupe ──
+MATCH (u:User)-[:MEMBER_OF]->(g:Group)-[:HAS_ACCESS_TO]->(m:Machine)
+WHERE m.criticality IN ["high","critical"]
+RETURN u.name AS utilisateur, g.name AS groupe, m.name AS machine, m.criticality AS criticite
+ORDER BY criticite DESC, utilisateur;
+
+// ── 12. Surface d'attaque : services exposés par machine ──
+MATCH (m:Machine)-[:EXPOSES]->(s:Service)
+RETURN m.name AS machine, collect(s.name + " (" + toString(s.port) + ")") AS services_exposes
+ORDER BY machine;

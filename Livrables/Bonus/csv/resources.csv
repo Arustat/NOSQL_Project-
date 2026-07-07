@@ -1,0 +1,6 @@
+name,sensitivity
+Base clients,high
+Données RH,high
+Active Directory,critical
+Sauvegardes,critical
+Secrets applicatifs,critical

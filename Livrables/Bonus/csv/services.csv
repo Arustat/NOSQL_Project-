@@ -1,0 +1,7 @@
+name,port
+SSH,22
+HTTP,80
+HTTPS,443
+RDP,3389
+SMB,445
+MongoDB,27017

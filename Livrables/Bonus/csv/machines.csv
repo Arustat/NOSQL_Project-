@@ -1,0 +1,8 @@
+name,type,criticality
+PC-ALICE,workstation,low
+PC-BOB,workstation,medium
+PC-ADMIN,workstation,high
+SRV-WEB,server,medium
+SRV-DB,database,high
+DC-01,domain_controller,critical
+NAS-BACKUP,backup_server,critical

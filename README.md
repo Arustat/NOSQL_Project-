@@ -12,13 +12,19 @@ Une alerte indique que **`PC-ALICE`** a été compromise via phishing. L'objecti
 
 ```
 NOSQL_Project-/
-├── docker-compose.yml     # Neo4j en local, data bind-mount sur ./data
-├── Dockerfile             # image auto-portée avec la data figée dedans
-├── .env                   # PASSWORD Neo4j (gitignore)
+├── docker-compose.yml         # Neo4j en local, data bind-mount sur ./data
+├── Dockerfile                 # image auto-portée avec la data figée dedans
+├── .env                       # PASSWORD Neo4j (gitignore)
 ├── .gitignore
 └── Livrables/
-    └── Requêtes Cypher/   # req_cypher.md + captures + export CSV
+    ├── Graphe Neo4j/          # modele_de_donnees.md (Livrable 1)
+    ├── Requêtes Cypher/       # req_cypher.md + captures + export CSV (Livrable 2)
+    ├── Chemins d'attaque/     # seed.cypher, requetes_analyse.cypher, chemins_attaque.md
+    ├── Rapport d'analyse cyber/  # rapport_analyse_cyber.md (Livrable 3)
+    └── Bonus/                 # import CSV + script Python (points bonus)
 ```
+
+> La présentation orale (Livrable 4) est le fichier `NoSQL_project_files.pptx`.
 
 ## Prérequis
 
@@ -37,7 +43,10 @@ NOSQL_Project-/
 | `Group`         | `name`                                      |
 
 > [!note]
-> Les relations d'analyse (`RUNS`, `CONNECTS_TO`, `VULNERABLE_TO`, `MEMBER_OF`, `HAS_ACCESS`…) sont à ajouter en bas de `seed.cypher` ou directement en base.
+> Le graphe complet (32 nœuds, 43 relations) est peuplé par
+> `Livrables/Chemins d'attaque/seed.cypher`. Les 8 types de relations
+> (`USES`, `MEMBER_OF`, `ADMIN_OF`, `HAS_ACCESS_TO`, `CONNECTED_TO`, `EXPOSES`,
+> `HAS_VULNERABILITY`, `HOSTS`) y sont créés en masse via `UNWIND`.
 
 ## Utilisation rapide (image déjà buildée)
 

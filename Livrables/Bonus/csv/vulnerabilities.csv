@@ -1,0 +1,6 @@
+cve,name,score,description
+CVE-2021-44228,Log4Shell,10,Exécution de code à distance via Log4j
+CVE-2020-1472,Zerologon,10,Élévation de privilèges sur contrôleur de domaine
+CVE-2019-0708,BlueKeep,9.8,Exécution de code à distance via RDP
+CVE-2022-22965,Spring4Shell,9.8,Exécution de code à distance sur application Spring
+CVE-2023-0001,SMB Misconfiguration,7.5,Mauvaise configuration du partage SMB

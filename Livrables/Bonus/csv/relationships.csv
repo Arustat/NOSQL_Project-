@@ -1,0 +1,44 @@
+source,source_label,rel,target,target_label
+alice,User,USES,PC-ALICE,Machine
+bob,User,USES,PC-BOB,Machine
+charlie,User,USES,PC-ADMIN,Machine
+eve,User,USES,PC-ALICE,Machine
+alice,User,MEMBER_OF,RH,Group
+bob,User,MEMBER_OF,DEV,Group
+charlie,User,MEMBER_OF,ADMINS,Group
+diana,User,MEMBER_OF,SECURITY,Group
+eve,User,MEMBER_OF,DEV,Group
+charlie,User,ADMIN_OF,DC-01,Machine
+charlie,User,ADMIN_OF,SRV-DB,Machine
+charlie,User,ADMIN_OF,NAS-BACKUP,Machine
+PC-ALICE,Machine,CONNECTED_TO,SRV-WEB,Machine
+PC-ALICE,Machine,CONNECTED_TO,PC-BOB,Machine
+PC-BOB,Machine,CONNECTED_TO,SRV-WEB,Machine
+SRV-WEB,Machine,CONNECTED_TO,SRV-DB,Machine
+SRV-WEB,Machine,CONNECTED_TO,NAS-BACKUP,Machine
+SRV-DB,Machine,CONNECTED_TO,DC-01,Machine
+SRV-DB,Machine,CONNECTED_TO,NAS-BACKUP,Machine
+PC-ADMIN,Machine,CONNECTED_TO,DC-01,Machine
+PC-ADMIN,Machine,CONNECTED_TO,SRV-DB,Machine
+PC-ADMIN,Machine,CONNECTED_TO,NAS-BACKUP,Machine
+SRV-WEB,Machine,EXPOSES,HTTP,Service
+SRV-WEB,Machine,EXPOSES,HTTPS,Service
+SRV-DB,Machine,EXPOSES,MongoDB,Service
+DC-01,Machine,EXPOSES,SMB,Service
+PC-BOB,Machine,EXPOSES,RDP,Service
+PC-ADMIN,Machine,EXPOSES,RDP,Service
+SRV-WEB,Machine,HAS_VULNERABILITY,CVE-2021-44228,Vulnerability
+SRV-WEB,Machine,HAS_VULNERABILITY,CVE-2022-22965,Vulnerability
+PC-BOB,Machine,HAS_VULNERABILITY,CVE-2019-0708,Vulnerability
+DC-01,Machine,HAS_VULNERABILITY,CVE-2020-1472,Vulnerability
+NAS-BACKUP,Machine,HAS_VULNERABILITY,CVE-2023-0001,Vulnerability
+RH,Group,HAS_ACCESS_TO,SRV-WEB,Machine
+DEV,Group,HAS_ACCESS_TO,SRV-DB,Machine
+ADMINS,Group,HAS_ACCESS_TO,DC-01,Machine
+ADMINS,Group,HAS_ACCESS_TO,NAS-BACKUP,Machine
+SECURITY,Group,HAS_ACCESS_TO,SRV-DB,Machine
+SRV-DB,Machine,HOSTS,Base clients,Resource
+SRV-DB,Machine,HOSTS,Secrets applicatifs,Resource
+SRV-DB,Machine,HOSTS,Données RH,Resource
+DC-01,Machine,HOSTS,Active Directory,Resource
+NAS-BACKUP,Machine,HOSTS,Sauvegardes,Resource
