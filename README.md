@@ -65,10 +65,10 @@ sleep 15
 
 # 2. Charger le jeu de données
 docker compose cp seed.cypher neo4j:/seed.cypher
-docker compose exec neo4j cypher-shell -u neo4j -p "(Mettre le password)" -f /seed.cypher
+docker compose exec neo4j cypher-shell -u neo4j -p "(Mettre le password du .env)" -f /seed.cypher
 
 # Vérif
-docker compose exec neo4j cypher-shell -u neo4j -p "(Mettre le password)" "MATCH (n) RETURN count(n);"
+docker compose exec neo4j cypher-shell -u neo4j -p "(Mettre le password du .env)" "MATCH (n) RETURN count(n);"
 ```
 
 ## Build & push de l'image
