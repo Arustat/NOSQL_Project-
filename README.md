@@ -14,7 +14,7 @@ Une alerte indique que **`PC-ALICE`** a été compromise via phishing. L'objecti
 NOSQL_Project-/
 ├── docker-compose.yml         # Neo4j en local, data bind-mount sur ./data
 ├── Dockerfile                 # image auto-portée avec la data figée dedans
-├── .env                       # PASSWORD Neo4j (gitignore)
+├── .env                       # PASSWORD Neo4j (non versionné)
 ├── .gitignore
 └── Livrables/
     ├── Graphe Neo4j/          # modele_de_donnees.md (Livrable 1)
@@ -26,21 +26,24 @@ NOSQL_Project-/
 
 > La présentation orale (Livrable 4) est le fichier `NoSQL_project_files.pptx`.
 
+> `data/` (base Neo4j générée) et `.env` ne sont pas versionnés. La base se
+> reconstruit via l'image Docker ou le `seed.cypher` (voir ci-dessous).
+
 ## Prérequis
 
 - Docker + Docker Compose
 - Un compte Docker Hub (pour le push)
 
-## Image du modèle de données
+## Modèle de données
 
 | Label           | Propriétés                                  |
 | --------------- | ------------------------------------------- |
-| `Ressource`     | `name`, `sensitivity`                       |
 | `User`          | `name`, `role`                              |
 | `Machine`       | `name`, `type`, `criticality`               |
+| `Group`         | `name`                                      |
 | `Service`       | `name`, `port`                              |
 | `Vulnerability` | `cve`, `name`, `score`, `description`       |
-| `Group`         | `name`                                      |
+| `Resource`      | `name`, `sensitivity`                       |
 
 > [!note]
 > Le graphe complet (32 nœuds, 43 relations) est peuplé par
@@ -54,7 +57,11 @@ NOSQL_Project-/
 docker run -d -p 7474:7474 -p 7687:7687 arustat/no_sql_cybercorp:latest
 ```
 
-Interface : http://localhost:7474 — login `neo4j` + mot de passe défini au build.
+Interface : http://localhost:7474 — login `neo4j` / mot de passe `CyberCorp-Neo4j-2026-lol-pelican99!`
+
+> Mot de passe volontairement public et jetable : la base est une démo sans donnée
+> réelle. En production, le secret ne serait pas figé dans l'image mais injecté au
+> runtime (`NEO4J_AUTH` / gestionnaire de secrets).
 
 ## Workflow de dev (local)
 
@@ -64,11 +71,11 @@ docker compose up -d
 sleep 15
 
 # 2. Charger le jeu de données
-docker compose cp seed.cypher neo4j:/seed.cypher
-docker compose exec neo4j cypher-shell -u neo4j -p "(Mettre le password du .env)" -f /seed.cypher
+docker compose cp "Livrables/Chemins d'attaque/seed.cypher" neo4j:/seed.cypher
+docker compose exec neo4j cypher-shell -u neo4j -p "CyberCorp-Neo4j-2026-lol-pelican99!" -f /seed.cypher
 
-# Vérif
-docker compose exec neo4j cypher-shell -u neo4j -p "(Mettre le password du .env)" "MATCH (n) RETURN count(n);"
+# Vérif (doit renvoyer 32)
+docker compose exec neo4j cypher-shell -u neo4j -p "CyberCorp-Neo4j-2026-lol-pelican99!" "MATCH (n) RETURN count(n);"
 ```
 
 ## Build & push de l'image
@@ -78,16 +85,15 @@ docker compose exec neo4j cypher-shell -u neo4j -p "(Mettre le password du .env)
 docker compose down
 
 # 2. Build : COPY data /data fige la base dans l'image
-docker build -t arustat/no_sql_cybercorp:1.0 .
+docker build -t arustat/no_sql_cybercorp:1.2 .
+docker build -t arustat/no_sql_cybercorp:latest .
 
 # 3. Push
 docker login
-docker push arustat/no_sql_cybercorp:1.0
+docker push arustat/no_sql_cybercorp:1.2
+docker push arustat/no_sql_cybercorp:latest
 ```
-
-> [!warning]
-> Le mot de passe et la base sont **baked** dans l'image. Push sur un repo **privé** si le contenu est sensible.
 
 ## Équipe
 
-Mayssa · Yasser · Enzo 
+Mayssa · Yasser · Enzo
